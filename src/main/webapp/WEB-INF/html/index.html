@@ -33,14 +33,19 @@
         <tr ng-repeat="book in bookList | orderBy:predicate">
             <td>{{book.name}}</td>
             <td>{{book.author}}</td>
+
             <td style="width:100px;text-align: center;">
-                <button class="btn btn-mini btn-danger" ng-click="deleteBook(book.id)">Remove</button>
+
                 <button class="btn btn-mini btn-success" ng-click="editBook(book)">Edit</button>
+
+                <button class="btn btn-mini btn-danger" confirmed-click="deleteBook(book.id)"
+                        ng-confirm-click="Are you sure ?">Remove
+                </button>
+
             </td>
         </tr>
         </tbody>
     </table>
-
 
     <button class="btn btn-danger" ng-show="bookList.length > 1" ng-click="deleteAllBook()">Delete All Book</button>
 
@@ -69,8 +74,9 @@
             </div>
             <div class="control-group" ng-hide="editMode">
                 <label class="control-label" for="captcha">Security Check</label>
+
                 <div class="controls">
-                    <simple-captcha id="captcha" valid="captchaValid" ></simple-captcha>
+                    <simple-captcha id="captcha" valid="captchaValid"></simple-captcha>
                 </div>
             </div>
             <div class="control-group">
@@ -85,13 +91,18 @@
                     <button type="button" class="btn" ng-click="resetBookForm()">Cancel</button>
                 </div>
             </div>
-
         </form>
     </modal-dialog>
-    <modal-dialog show='generalModal' width='600px' height='60%'>
-        <div class="alert alert-error" ng-show="error">
-            {{errorMessage}}
+    <modal-dialog show='generalModal' width='600px' height=70%'>
+        <h4>Error</h4>
+
+        <div ng-show="error">
+            <pre>{{errorMessage}}</pre>
         </div>
+        <hr>
+
+        <button type="button" class="btn btn-primary" ng-click="closeGeneralModal()">OK</button>
+        <hr>
     </modal-dialog>
 
     <div ng-view></div>

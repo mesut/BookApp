@@ -65,11 +65,11 @@
     box-shadow: 4px 4px 80px #000;
 }
 
+
 .ng-modal-dialog-content {
     padding: 10px;
     text-align: left;
 }
-
 .ng-modal-close {
     position: absolute;
     top: 3px;

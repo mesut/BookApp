@@ -9,3 +9,8 @@ AppFilters.filter('interpolate', ['version', function (version) {
         return String(text).replace(/\%VERSION\%/mg, version);
     }
 }]);
+AppFilters.filter('breakFilter', function () {
+    return function (text) {
+        if (text !== undefined) return text.replace(/\n/g, '<br />');
+    };
+});

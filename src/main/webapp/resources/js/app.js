@@ -10,27 +10,6 @@ App.controller('BookController', ['$scope', '$http', '$rootScope', function ($sc
     $scope.addOrUpdateModal = false;
     $scope.generalModal = false;
 
-    $scope.openAddOrUpdateModal = function () {
-        $scope.addOrUpdateModal = true;
-        $scope.editMode = false
-        $scope.book = {};
-        $scope.resetError();
-    };
-    $scope.validateBook = function (book) {
-        var message = '';
-        if (isEmpty($scope.book.name)) {
-            message = "Kitap ismi girilmelidir.\n";
-        }
-        if (isEmpty($scope.book.author)) {
-            message += "Yazar ismi girilmelidir.\n";
-        }
-        if (!$scope.editMode) {
-            if (!$rootScope.captchResult) {
-                message += "Captcha yalnis girilmistir..\n";
-            }
-        }
-        return message;
-    };
 
     $scope.fetchBookList = function () {
         $http.get('books/booklist.json').success(function (bookList) {
@@ -55,7 +34,10 @@ App.controller('BookController', ['$scope', '$http', '$rootScope', function ($sc
 
     $scope.updateBook = function (book) {
         $scope.resetError();
-
+        if (!isEmpty($scope.validateBook(book))) {
+            $scope.setError($scope.validateBook(book));
+            return;
+        }
         $http.put('books/updateBook', book).success(function () {
             $scope.fetchBookList();
             $scope.book.name = '';
@@ -126,4 +108,30 @@ App.controller('BookController', ['$scope', '$http', '$rootScope', function ($sc
     var isEmpty = function (val) {
         return (val == 'undefined' || val == null || val.length <= 0) ? true : false;
     }
+    $scope.closeGeneralModal = function () {
+        $scope.generalModal = false;
+        $scope.resetError();
+    };
+
+    $scope.openAddOrUpdateModal = function () {
+        $scope.addOrUpdateModal = true;
+        $scope.editMode = false
+        $scope.book = {};
+        $scope.resetError();
+    };
+    $scope.validateBook = function (book) {
+        var message = '';
+        if (isEmpty($scope.book.name)) {
+            message = "Please enter book name\n";
+        }
+        if (isEmpty($scope.book.author)) {
+            message += "Please enter author name\n";
+        }
+        if (!$scope.editMode) {
+            if (!$rootScope.captchResult) {
+                message += "Please verify captcha\n";
+            }
+        }
+        return message;
+    };
 }]);
