@@ -44,12 +44,5 @@ public class BookController implements Serializable {
     public @ResponseBody void deleteAllBook(){
         bookService.deleteAll();
     }
-    @RequestMapping("/layout")
-    public String getBookPartialPage(ModelMap modelMap) {
-
-        return "books/layout";
-    }
-    
-    
     
 }

@@ -4,26 +4,99 @@
     <meta charset="utf-8">
     <title>Service App</title>
     <link rel="stylesheet" href="resources/css/app.css"/>
-    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css"/>
+    <script src="resources/js/lib/angular/angular.js"></script>
+    <script src="resources/js/app.js"></script>
+    <script src="resources/js/services.js"></script>
+    <script src="resources/js/filters.js"></script>
+    <script src="resources/js/directives.js"></script>
+    <script src="resources/js/lib/angular/jquery-1.11.1.js"></script>
 </head>
 <body>
-<div id="wrapper">
+<div id="wrapper" ng-controller="BookController">
 
-    <ul class="menu">
-        <li><a href="#/books">Book App</a></li>
-    </ul>
-    <hr class="" />
+    <h3>Book List</h3>
+
+    <button type="button" class="btn btn-primary" ng-click="openAddOrUpdateModal()">Add New Book</button>
+    <div class="alert alert-info" ng-show="bookList.length == 0">
+        No book found
+    </div>
+    <table class="table table-bordered table-striped" ng-show="bookList.length > 0">
+        <thead>
+        <tr>
+            <th style="text-align: center;">Book Name</th>
+            <th style="...">Author</th>
+            <th style="text-align: center;">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="book in bookList | orderBy:predicate">
+            <td>{{book.name}}</td>
+            <td>{{book.author}}</td>
+            <td style="width:100px;text-align: center;">
+                <button class="btn btn-mini btn-danger" ng-click="deleteBook(book.id)">Remove</button>
+                <button class="btn btn-mini btn-success" ng-click="editBook(book)">Edit</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <button class="btn btn-danger" ng-show="bookList.length > 1" ng-click="deleteAllBook()">Delete All Book</button>
+
+    <modal-dialog show='addOrUpdateModal' width='600px' height=40%'>
+
+        <form class="form-horizontal">
+            <h4 ng-hide="editMode">Add New Book</h4>
+            <h4 ng-show="editMode">Update Book</h4>
+            <hr>
+
+            <div class="control-group">
+                <label class="control-label" for="inputName">Book Name</label>
+
+                <div class="controls">
+                    <input type="text" id="inputName" ng-model="book.name" placeholder="Book Name" required min="2">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputAuhor">Author Name</label>
+
+                <div class="controls">
+
+                    <input class="span3" type="text" id="inputAuhor" ng-model="book.author" placeholder="Author Name"
+                           require>
+                </div>
+            </div>
+            <div class="control-group" ng-hide="editMode">
+                <label class="control-label" for="captcha">Security Check</label>
+                <div class="controls">
+                    <simple-captcha id="captcha" valid="captchaValid" ></simple-captcha>
+                </div>
+            </div>
+            <div class="control-group">
+                <hr/>
+                <div class="controls">
+                    <button type="button" class="btn btn-primary" ng-hide="editMode"
+                            ng-click="createBook(book)">Create Book
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-show="editMode"
+                            ng-click="updateBook(book)">Update Book
+                    </button>
+                    <button type="button" class="btn" ng-click="resetBookForm()">Cancel</button>
+                </div>
+            </div>
+
+        </form>
+    </modal-dialog>
+    <modal-dialog show='generalModal' width='600px' height='60%'>
+        <div class="alert alert-error" ng-show="error">
+            {{errorMessage}}
+        </div>
+    </modal-dialog>
+
     <div ng-view></div>
 
 </div>
-
-<script src="resources/js/lib/angular/angular.js"></script>
-<script src="resources/js/app.js"></script>
-<script src="resources/js/services.js"></script>
-<script src="resources/js/controllers/BookController.js"></script>
-<script src="resources/js/filters.js"></script>
-<script src="resources/js/directives.js"></script>
-<script src="resources/js/lib/angular/jquery-1.11.1.js"></script>
 
 </body>
 </html>
