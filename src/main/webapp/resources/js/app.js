@@ -18,8 +18,7 @@ App.controller('BookController', ['$scope', '$http', '$rootScope', function ($sc
     };
 
     $scope.createBook = function (book) {
-        if (!isEmpty($scope.validateBook(book))) {
-            $scope.setError($scope.validateBook(book));
+        if (!isValidBook(book)) {
             return;
         }
         $http.post('books/createBook', book).success(function () {
@@ -27,15 +26,14 @@ App.controller('BookController', ['$scope', '$http', '$rootScope', function ($sc
             $scope.book.name = '';
             $scope.book.author = '';
             $scope.addOrUpdateModal = false;
+            toastr.info("Book created");
         }).error(function () {
-            $scope.setError('Could not add a new book');
+            toastr.error("Could not add a new book");
         });
     };
 
     $scope.updateBook = function (book) {
-        $scope.resetError();
-        if (!isEmpty($scope.validateBook(book))) {
-            $scope.setError($scope.validateBook(book));
+        if (!isValidBook(book)) {
             return;
         }
         $http.put('books/updateBook', book).success(function () {
@@ -44,13 +42,13 @@ App.controller('BookController', ['$scope', '$http', '$rootScope', function ($sc
             $scope.book.author = '';
             $scope.editMode = false;
             $scope.addOrUpdateModal = false;
+            toastr.info("Book updated");
         }).error(function () {
-            $scope.setError('Could not update the book');
+            toastr.error('Could not update the book');
         });
     };
 
     $scope.editBook = function (book) {
-        $scope.resetError();
         $scope.book = book;
         $scope.editMode = true;
         $scope.addOrUpdateModal = true;
@@ -58,41 +56,33 @@ App.controller('BookController', ['$scope', '$http', '$rootScope', function ($sc
     };
 
     $scope.deleteBook = function (id) {
-        $scope.resetError();
 
         $http.delete('books/deleteBook/' + id).success(function () {
+            toastr.info('Book deleted');
             $scope.fetchBookList();
         }).error(function () {
-            $scope.setError('Could not remove book');
+            toastr.error('Could not remove book');
         });
         $scope.book.name = '';
         $scope.book.auhor = '';
     };
 
     $scope.deleteAllBook = function () {
-        $scope.resetError();
-
         $http.delete('books/deleteAllBook').success(function () {
+            toastr.info("Deleted all books");
             $scope.fetchBookList();
         }).error(function () {
-            $scope.setError('Could not remove all book ');
+            toastr.error('Could not remove all book ');
         });
 
     };
 
     $scope.resetBookForm = function () {
-        $scope.resetError();
         $scope.book = {};
         $scope.editMode = false;
         $scope.addOrUpdateModal = false;
         $scope.generalModal = false;
 
-    };
-
-    $scope.resetError = function () {
-        $scope.error = false;
-        $scope.errorMessage = '';
-        $scope.generalModal = false;
     };
 
     $scope.setError = function (message) {
@@ -108,30 +98,29 @@ App.controller('BookController', ['$scope', '$http', '$rootScope', function ($sc
     var isEmpty = function (val) {
         return (val == 'undefined' || val == null || val.length <= 0) ? true : false;
     }
-    $scope.closeGeneralModal = function () {
-        $scope.generalModal = false;
-        $scope.resetError();
-    };
 
     $scope.openAddOrUpdateModal = function () {
         $scope.addOrUpdateModal = true;
         $scope.editMode = false
         $scope.book = {};
-        $scope.resetError();
     };
-    $scope.validateBook = function (book) {
-        var message = '';
+    var isValidBook = function (book) {
         if (isEmpty($scope.book.name)) {
-            message = "Please enter book name\n";
+            toastr.error('Please enter book name');
+            return false;
+
         }
         if (isEmpty($scope.book.author)) {
-            message += "Please enter author name\n";
+            toastr.error('Please enter author name');
+            return false;
         }
         if (!$scope.editMode) {
             if (!$rootScope.captchResult) {
-                message += "Please verify captcha\n";
+                toastr.error('Please verify captcha');
+                return false;
             }
         }
-        return message;
+        ;
+        return true;
     };
 }]);

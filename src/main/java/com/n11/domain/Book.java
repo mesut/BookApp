@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 import java.io.Serializable;
 import java.math.BigInteger;
 
@@ -12,12 +13,12 @@ import java.math.BigInteger;
  */
 @Data
 @Document
-public class Book implements Serializable{
-    
+public class Book implements Serializable {
+
     @Id
     private String id;
-    
+
     private String name;
-    
+
     private String author;
 }

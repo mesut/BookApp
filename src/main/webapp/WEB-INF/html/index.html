@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Service App</title>
     <link rel="stylesheet" href="resources/css/app.css"/>
+    <link rel="stylesheet" href="resources/css/toastr.css"/>
     <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css"/>
     <script src="resources/js/lib/angular/angular.js"></script>
     <script src="resources/js/app.js"></script>
@@ -11,6 +12,7 @@
     <script src="resources/js/filters.js"></script>
     <script src="resources/js/directives.js"></script>
     <script src="resources/js/lib/angular/jquery-1.11.1.js"></script>
+    <script src="resources/js/lib/angular/toastr.js"></script>
 </head>
 <body>
 <div id="wrapper" ng-controller="BookController">
@@ -93,18 +95,6 @@
             </div>
         </form>
     </modal-dialog>
-    <modal-dialog show='generalModal' width='600px' height=70%'>
-        <h4>Error</h4>
-
-        <div ng-show="error">
-            <pre>{{errorMessage}}</pre>
-        </div>
-        <hr>
-
-        <button type="button" class="btn btn-primary" ng-click="closeGeneralModal()">OK</button>
-        <hr>
-    </modal-dialog>
-
     <div ng-view></div>
 
 </div>
