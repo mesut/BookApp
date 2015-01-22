@@ -273,10 +273,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
-            </plugin>
+
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -316,20 +313,7 @@
                 <programs> <program> <mainClass>com.n11.scsw.web.tomcat.MainEmbeddedTomcat</mainClass> <name>embedded-tomcat</name> </program> </programs> </configuration> <executions>
                 <execution> <phase>package</phase> <goals> <goal>assemble</goal> </goals> </execution> </executions> </plugin> -->
 
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <configuration>
-                    <addContextWarDependencies>true</addContextWarDependencies>
-                    <addWarDependenciesInClassloader>true</addWarDependenciesInClassloader>
-                    <contextFile>./src/main/webapp/META-INF/context.xml</contextFile>
-                    <url>http://localhost:8080/manager/text</url>
-                    <!-- <update>true</update> -->
-                </configuration>
-                <dependencies>
-                    <!-- add tomcat 'provided' or 'runtime' dependencies here -->
-                </dependencies>
-            </plugin>
+
         </plugins>
         <pluginManagement>
             <!-- Lexicographically ordered pluginManagement! -->
@@ -471,11 +455,7 @@
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>2.15</version>
                 </plugin>
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat7-maven-plugin</artifactId>
-                    <version>${tomcat-maven-plugin.version}</version>
-                </plugin>
+
                 <plugin>
                     <!-- http://mojo.codehaus.org/versions-maven-plugin/usage.html -->
                     <!-- mvn versions:display-property-updates -->
@@ -520,23 +500,6 @@
                     <groupId>org.mortbay.jetty</groupId>
                     <artifactId>jetty-maven-plugin</artifactId>
                     <version>${jetty-maven-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>pl.project13.maven</groupId>
-                    <artifactId>git-commit-id-plugin</artifactId>
-                    <version>2.1.5</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>revision</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-                        <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                        <generateGitPropertiesFilename>src/main/resources/git.properties</generateGitPropertiesFilename>
-                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

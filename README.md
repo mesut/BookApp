@@ -18,12 +18,9 @@ To build the WAR file simply run `mvn install`. This puts the WAR
 file in `target/spring-angularjs.war`.
 
 
-## Running
-###  via jetty
-You can run the app in Jetty using `mvn jetty:run`.
+## Running Via Jetty
 
-### via Tomcat
-You can run the app in Tomcat7 using `tomcat7:run`.
+You can run the app in Jetty using `mvn jetty:run`.
 
 Once started, the app is available at `http://localhost:8080/`.
 
