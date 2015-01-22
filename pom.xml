@@ -61,7 +61,7 @@
         <servlet-api.version>2.5</servlet-api.version>
         <slf4j.version>1.7.5</slf4j.version>
         <spring-data-mongodb.version>1.3.0.RELEASE</spring-data-mongodb.version>
-        <springframework.version>3.1.2.RELEASE</springframework.version>
+        <springframework.version>3.2.0.RELEASE</springframework.version>
         <springframework-android.version>1.0.1.RELEASE</springframework-android.version>
         <springframework-ws.version>2.1.3.RELEASE</springframework-ws.version>
         <tika-core.version>1.3</tika-core.version>
@@ -73,6 +73,7 @@
         <org.webjars-jquery-cookie.version>1.3.1</org.webjars-jquery-cookie.version>
         <woodstox.version>4.2.0</woodstox.version>
         <xstream.version>1.4.4</xstream.version>
+        <json-path.version>0.8.1</json-path.version>
         <!-- -->
         <!-- plugin properties -->
         <!-- -->
@@ -94,6 +95,21 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${json-path.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+
         <!-- begin dependencies with ordering importance -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -114,7 +130,10 @@
 
         <!-- end dependencies with ordering importance -->
 
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -238,7 +257,14 @@
             <artifactId>velocity</artifactId>
             <version>1.7</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>BookApp</finalName>
@@ -1072,6 +1098,11 @@
                 <groupId>org.webjars</groupId>
                 <artifactId>jquery-cookie</artifactId>
                 <version>${org.webjars-jquery-cookie.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
             </dependency>
 
         </dependencies>

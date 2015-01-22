@@ -49,7 +49,10 @@
         </tbody>
     </table>
 
-    <button class="btn btn-danger" ng-show="bookList.length > 1" ng-click="deleteAllBook()">Delete All Book</button>
+    <button class="btn btn-danger" confirmed-click="deleteAllBook()" ng-show="bookList.length > 1"
+            ng-confirm-click="Are you sure delete all book  ?">Delete All Book
+    </button>
+
 
     <modal-dialog show='addOrUpdateModal' width='600px' height=40%'>
 

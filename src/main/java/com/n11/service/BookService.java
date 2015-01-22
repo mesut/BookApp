@@ -15,7 +15,9 @@ public interface BookService {
     public List<Book> getAllBook();
 
     public void delete(String id);
-
+    
+    public void delete(Book book);
+    
     public void save(Book book);
 
     public void update(Book book);

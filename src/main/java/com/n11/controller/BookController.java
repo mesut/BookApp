@@ -5,12 +5,12 @@ import com.n11.service.BookService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by mozen on 1/18/2015.
@@ -20,17 +20,17 @@ import java.util.UUID;
 @RequestMapping("/books")
 @Setter
 public class BookController implements Serializable {
-    
+
     @Autowired
     private BookService bookService;
-    
+
     @RequestMapping("booklist.json")
     public @ResponseBody List<Book> getBookList(){
         return bookService.getAllBook();
     }
     @RequestMapping(value = "/createBook",method = RequestMethod.POST)
     public @ResponseBody void createBook(@RequestBody Book book){
-            bookService.save(book);        
+            bookService.save(book);
     }
     @RequestMapping(value = "/updateBook",method = RequestMethod.PUT)
     public @ResponseBody  void updateBook(@RequestBody Book book){
@@ -44,5 +44,5 @@ public class BookController implements Serializable {
     public @ResponseBody void deleteAllBook(){
         bookService.deleteAll();
     }
-    
+
 }

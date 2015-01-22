@@ -3,8 +3,10 @@ package com.n11.service.impl;
 import com.n11.domain.Book;
 import com.n11.repository.BookRepository;
 import com.n11.service.BookService;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -17,6 +19,7 @@ import java.util.List;
 @Service("bookService")
 @Slf4j
 @Setter
+@Getter
 public class BookServiceImpl implements BookService, Serializable {
 
     @Inject
@@ -38,10 +41,13 @@ public class BookServiceImpl implements BookService, Serializable {
         Book foundBook = getBook(id);
         if (foundBook != null) {
             bookRepository.delete(foundBook);
-        } else {
-            throw new IllegalArgumentException("uuid " + id + " not found");
         }
 
+    }
+
+    @Override
+    public void delete(Book book) {
+        bookRepository.delete(book);
     }
 
     @Override
@@ -51,7 +57,7 @@ public class BookServiceImpl implements BookService, Serializable {
 
     @Override
     public void update(Book book) {
-        delete(book.getId());
+        delete(book);
         save(book);
     }
 
