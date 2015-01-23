@@ -18,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/books")
+@Setter
 public class BookController implements Serializable {
 
     @Autowired
@@ -44,11 +45,4 @@ public class BookController implements Serializable {
         bookService.deleteAll();
     }
 
-    public BookService getBookService() {
-        return bookService;
-    }
-
-    public void setBookService(BookService bookService) {
-        this.bookService = bookService;
-    }
 }
