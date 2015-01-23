@@ -29,3 +29,9 @@ Use a browser to access to the app
 
 http://localhost:8080/BookApp/
 
+## Heroku
+
+You can access to the web app that deployed heroku
+
+https://damp-ravine-9079.herokuapp.com/
+
