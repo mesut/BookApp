@@ -27,7 +27,7 @@ public class MongoDbConfiguration extends AbstractMongoConfiguration {
 	@Bean
 	public MongoURI mongoURI() {
 		LOGGER.info("connecting to db");
-		MongoURI mongoURI = new MongoURI("mongodb://mesut:1@localhost:27017/admin");
+		MongoURI mongoURI = new MongoURI(System.getenv("MONGOHQ_URL"));
 		assert mongoURI != null : "missing MONGOHQ_URL";
 		return mongoURI;
 	}
