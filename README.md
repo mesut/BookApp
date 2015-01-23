@@ -9,8 +9,8 @@ A simple web app that uses SpringMVC,AngularJS and MongoDB
  Bootstrap 3.0</a><br>
  Mockito for testing<br>
  Karma for js testing<br>
- Toastr for  JavaScript Notifications 
- Github<br>
+ Toastr for  JavaScript Notifications<br>
+ Github
 
 ## Build 
 
