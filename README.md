@@ -1,7 +1,7 @@
 # BookApp
 A simple web app that uses SpringMVC,AngularJS and MongoDB
 
-###Technologies used:
+##Technologies used:
  MongoHQ</a> for database persistence<br>
  Spring Data MongoDB 1.3<br>
  Spring 3.2.4</a> for server-side MVC<br>
